@@ -1,0 +1,37 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+
+{% block title %}
+{{ new.name }}
+{% endblock title %}
+
+{% block content %}
+
+<h1><td><a class="nav-link" href="{% url 'new_detail' new.pk %}"> {{ new.name }}</a></td></h1>
+               <h2>
+                   <td>
+                   Выбраная категория:
+                   </td>
+                       <td>
+                           {% for cat in new.category_new.all %}
+                           {{ cat.name }}
+                           {% endfor %}
+
+                       </td>
+               </h2>
+               <h3><td>{{ new.description|truncatechars:500|censor }}</td></h3>
+               <td>{{ new.date_create|date:'M d Y' }}</td>
+
+
+  <div>
+         {% if add_subscribers %}
+         <b>Если больше не желаете получать уведомление о новых новостях, нажмите отписаться</b>
+         <a class="btn" href="{% url 'new_detail' new.pk %}"><button type="submit" value="unfollow" name="pk" class="btn btn-light btn-outline-danger"> Отписаться</button></a>
+         {% else %}
+         <b>Если хотите получать уведомления о новых новостях, вы можете подписаться на данную категорию</b>
+         <a class="btn" href="{% url 'new_detail' new.pk %}"><button type="submit" value="follow" name="pk" class="btn btn-light btn-outline-primary"> Подписаться</button></a>
+         {% endif %}
+  </div>
+
+
+{% endblock content %}}

@@ -1,0 +1,26 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block title %}
+Подписка на категорию
+{% endblock title %}
+
+{% block content %}
+<html>
+<h2>выберите категорию</h2>
+{% for cat in new.category_new.all %}
+    <h4 style="display:inline;">{{ category_new.name }}</h4>
+    {% if not add_subscriber %}
+        <hr>
+        <button><a class="nav-link" href="{% url 'add_subscribe' category.pk %}">
+            <h4><strong>Subscribe!</strong></h4>
+        </a></button>
+    {% else%}
+        <hr>
+        <button><a class="nav-link" href="{% url 'delete_subscribe' category.pk %}">
+            <h4><strong>Unsubscribe!</strong></h4>
+        </a></button>
+    {% endif %}
+{% endfor %}
+{% endblock content %}

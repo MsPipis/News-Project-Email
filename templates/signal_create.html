@@ -1,0 +1,14 @@
+<body>
+  <h1>News Portal subscription</h1>
+
+     <strong>{{ new.description|truncatechars:20|censor }} </strong>
+  <p>В категории: <strong><td>
+                   {% for cat in new.category_new.all %}
+                       {{ cat.name }}
+                   {% endfor %}
+               </td></strong> есть новый пост от: <strong>"{{ subscribeUser }}"</strong>.
+    <strong> </strong>
+  </p>
+  <p> Link to post: <a href="http://127.0.0.1:8001/news/{{pk_id}}" class="btn btn-outline-success">кнопка</a><br> </p>
+
+</body>
